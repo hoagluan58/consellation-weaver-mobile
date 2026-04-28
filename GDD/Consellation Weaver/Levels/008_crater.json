@@ -1,0 +1,23 @@
+{
+  "id": "008_crater",
+  "index": 8,
+  "chapter": "ch1_spring_sky",
+  "tier": "easy",
+  "constellation": "Crater",
+  "hemisphere": "E",
+  "best_month": 4,
+  "lore": "The cup of Apollo, spilled by the careless raven and placed nearby as a lesson.",
+  "width": 4,
+  "height": 4,
+  "waypoints": [
+    {"x": 1, "y": 0, "order": 1},
+    {"x": 0, "y": 3, "order": 2},
+    {"x": 3, "y": 0, "order": 3},
+    {"x": 3, "y": 3, "order": 4}
+  ],
+  "solution": [[1,0],[0,0],[0,1],[0,2],[0,3],[1,3],[1,2],[1,1],[2,1],[2,0],[3,0],[3,1],[3,2],[2,2],[2,3],[3,3]],
+  "designer_notes": {
+    "pedagogical_goal": "Non-corner starting cell. Teaches that star 1 is not always a corner.",
+    "estimated_solve_seconds": 35
+  }
+}

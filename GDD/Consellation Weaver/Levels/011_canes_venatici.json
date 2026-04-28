@@ -1,0 +1,23 @@
+{
+  "id": "011_canes_venatici",
+  "index": 11,
+  "chapter": "ch1_spring_sky",
+  "tier": "easy",
+  "constellation": "Canes Venatici",
+  "hemisphere": "N",
+  "best_month": 5,
+  "lore": "The hunting dogs of Boötes, added late to the sky by a careful astronomer.",
+  "width": 4,
+  "height": 4,
+  "waypoints": [
+    {"x": 0, "y": 0, "order": 1},
+    {"x": 2, "y": 2, "order": 2},
+    {"x": 3, "y": 0, "order": 3},
+    {"x": 0, "y": 3, "order": 4}
+  ],
+  "solution": [[0,0],[1,0],[1,1],[0,1],[0,2],[1,2],[2,2],[2,1],[2,0],[3,0],[3,1],[3,2],[3,3],[2,3],[1,3],[0,3]],
+  "designer_notes": {
+    "pedagogical_goal": "Middle waypoint pulls the path inward before reaching a corner. Introduces center-of-grid detours.",
+    "estimated_solve_seconds": 45
+  }
+}
