@@ -1,0 +1,23 @@
+{
+  "id": "016_sagittarius",
+  "index": 16,
+  "chapter": "chapter_3",
+  "tier": "hard",
+  "constellation": "Sagittarius",
+  "hemisphere": "S",
+  "best_month": 8,
+  "lore": "The Archer. At its heart lies the galactic center — a supermassive black hole four million times the mass of our sun.",
+  "width": 5,
+  "height": 5,
+  "waypoints": [
+    {"x": 0, "y": 0, "order": 1},
+    {"x": 4, "y": 0, "order": 2},
+    {"x": 4, "y": 2, "order": 3},
+    {"x": 4, "y": 4, "order": 4}
+  ],
+  "solution": [[0,0],[1,0],[2,0],[3,0],[4,0],[4,1],[3,1],[2,1],[1,1],[0,1],[0,2],[1,2],[2,2],[3,2],[4,2],[4,3],[3,3],[2,3],[1,3],[0,3],[0,4],[1,4],[2,4],[3,4],[4,4]],
+  "designer_notes": {
+    "pedagogical_goal": "Four waypoints at top and right edge. Tests whether players can keep the boustrophedon on a 5x5.",
+    "estimated_solve_seconds": 100
+  }
+}

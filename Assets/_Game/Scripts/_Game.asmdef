@@ -3,7 +3,10 @@
     "rootNamespace": "ConstellationWeaver",
     "references": [
         "NFramework",
-        "Unity.InputSystem"
+        "Unity.InputSystem",
+        "PrimeTween.Runtime",
+        "UniTask",
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

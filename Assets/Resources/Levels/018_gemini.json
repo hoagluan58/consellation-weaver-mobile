@@ -1,0 +1,23 @@
+{
+  "id": "018_gemini",
+  "index": 18,
+  "chapter": "chapter_3",
+  "tier": "hard",
+  "constellation": "Gemini",
+  "hemisphere": "N",
+  "best_month": 2,
+  "lore": "The Twins. Castor and Pollux — one mortal, one divine — forever side by side in the sky.",
+  "width": 5,
+  "height": 5,
+  "waypoints": [
+    {"x": 0, "y": 0, "order": 1},
+    {"x": 4, "y": 4, "order": 2},
+    {"x": 4, "y": 2, "order": 3},
+    {"x": 4, "y": 0, "order": 4}
+  ],
+  "solution": [[0,0],[0,1],[0,2],[0,3],[0,4],[1,4],[2,4],[3,4],[4,4],[4,3],[3,3],[2,3],[1,3],[1,2],[2,2],[3,2],[4,2],[4,1],[3,1],[2,1],[1,1],[1,0],[2,0],[3,0],[4,0]],
+  "designer_notes": {
+    "pedagogical_goal": "Spiral-in path with waypoints along the right edge. Tests advanced spatial reasoning.",
+    "estimated_solve_seconds": 110
+  }
+}

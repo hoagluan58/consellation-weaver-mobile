@@ -1,0 +1,21 @@
+{
+  "id": "002_crux",
+  "index": 2,
+  "chapter": "tutorial",
+  "tier": "tutorial",
+  "constellation": "Crux",
+  "hemisphere": "S",
+  "best_month": 5,
+  "lore": "The Southern Cross. Four stars form a kite shape, a compass for southern navigators.",
+  "width": 3,
+  "height": 3,
+  "waypoints": [
+    {"x": 0, "y": 0, "order": 1},
+    {"x": 2, "y": 2, "order": 2}
+  ],
+  "solution": [[0,0],[0,1],[0,2],[1,2],[1,1],[1,0],[2,0],[2,1],[2,2]],
+  "designer_notes": {
+    "pedagogical_goal": "Reinforce the snake-path concept with a bottom-right endpoint.",
+    "estimated_solve_seconds": 12
+  }
+}

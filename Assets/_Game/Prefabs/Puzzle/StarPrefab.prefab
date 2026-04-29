@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5315603670690648227}
   - component: {fileID: 4689932754691653560}
+  - component: {fileID: 7652422497912611581}
   m_Layer: 0
   m_Name: StarPrefab
   m_TagString: Untagged
@@ -58,7 +59,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 3814c04659bbb4f41bdd1bf1d3ce39e3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -91,3 +92,22 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &7652422497912611581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123648822230545666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3910a44407c33b544936b0248406948a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ConstellationWeaver.Game::ConstellationWeaver.Puzzle.StarWaypointVisual
+  _twinkleIntervalMin: 2.5
+  _twinkleIntervalMax: 5
+  _twinkleDuration: 0.35
+  _twinkleMinIntensity: 0.6
+  _twinkleMaxIntensity: 1.5
+  _hitPunchScale: 1.4
+  _hitPunchDuration: 0.18

@@ -1,0 +1,23 @@
+{
+  "id": "014_leo",
+  "index": 14,
+  "chapter": "chapter_2",
+  "tier": "medium",
+  "constellation": "Leo",
+  "hemisphere": "N",
+  "best_month": 4,
+  "lore": "The Lion. The sickle of Leo traces the lion's mane around bright Regulus.",
+  "width": 5,
+  "height": 4,
+  "waypoints": [
+    {"x": 0, "y": 0, "order": 1},
+    {"x": 0, "y": 3, "order": 2},
+    {"x": 2, "y": 3, "order": 3},
+    {"x": 4, "y": 3, "order": 4}
+  ],
+  "solution": [[0,0],[0,1],[0,2],[0,3],[1,3],[1,2],[1,1],[1,0],[2,0],[2,1],[2,2],[2,3],[3,3],[3,2],[3,1],[3,0],[4,0],[4,1],[4,2],[4,3]],
+  "designer_notes": {
+    "pedagogical_goal": "Waypoints along the bottom row. Players learn to save the bottom row for the end.",
+    "estimated_solve_seconds": 80
+  }
+}

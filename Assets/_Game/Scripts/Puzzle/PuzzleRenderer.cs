@@ -21,6 +21,8 @@ namespace ConstellationWeaver.Puzzle
         private Vector2 _gridOrigin; // World position of top-left cell center
         private GridModel _grid;
         private List<GameObject> _spawnedStars = new List<GameObject>();
+        // Pre-allocated lookup for waypoint visual components — zero hot-path alloc
+        private Dictionary<Vector2Int, StarWaypointVisual> _starVisuals = new Dictionary<Vector2Int, StarWaypointVisual>();
         private bool _isDrawing = false;
 
         private void Awake()
@@ -50,6 +52,12 @@ namespace ConstellationWeaver.Puzzle
             }
         }
 
+        /// <summary>Called by PuzzleLineSetup at Awake to inject the confirmed-path LineRenderer.</summary>
+        public void SetPathLineRenderer(LineRenderer lr)    => _pathLineRenderer    = lr;
+
+        /// <summary>Called by PuzzleLineSetup at Awake to inject the preview LineRenderer.</summary>
+        public void SetPreviewLineRenderer(LineRenderer lr) => _previewLineRenderer = lr;
+
         public void RenderLevel(GridModel grid)
         {
             _grid = grid;
@@ -70,6 +78,8 @@ namespace ConstellationWeaver.Puzzle
             
             _gridOrigin = new Vector2(startX, startY);
             
+            _starVisuals.Clear();
+
             // Spawn Waypoint Stars
             for (int y = 0; y < grid.Height; y++)
             {
@@ -82,6 +92,10 @@ namespace ConstellationWeaver.Puzzle
                         var starObj = Instantiate(_starPrefab, GetWorldPosition(pos), Quaternion.identity, transform);
                         starObj.name = $"Star_{wp.order}";
                         _spawnedStars.Add(starObj);
+
+                        var visual = starObj.GetComponent<StarWaypointVisual>();
+                        if (visual != null)
+                            _starVisuals[pos] = visual;
                     }
                 }
             }
@@ -163,6 +177,10 @@ namespace ConstellationWeaver.Puzzle
         {
             _isDrawing = true;
             UpdateLineRenderer();
+
+            // Fire hit animation if this cell is a waypoint
+            if (_starVisuals.TryGetValue(cell, out var visual))
+                visual.PlayHitAnimation();
         }
 
         private void HandlePathPopped(Vector2Int cell)

@@ -1,0 +1,23 @@
+{
+  "id": "008_corona_borealis",
+  "index": 8,
+  "chapter": "chapter_1",
+  "tier": "easy",
+  "constellation": "Corona Borealis",
+  "hemisphere": "N",
+  "best_month": 6,
+  "lore": "The Northern Crown. A gem-like arc of stars, said to be Ariadne's wedding crown.",
+  "width": 4,
+  "height": 4,
+  "waypoints": [
+    {"x": 0, "y": 0, "order": 1},
+    {"x": 3, "y": 0, "order": 2},
+    {"x": 3, "y": 2, "order": 3},
+    {"x": 0, "y": 3, "order": 4}
+  ],
+  "solution": [[0,0],[1,0],[2,0],[3,0],[3,1],[2,1],[1,1],[0,1],[0,2],[1,2],[2,2],[3,2],[3,3],[2,3],[1,3],[0,3]],
+  "designer_notes": {
+    "pedagogical_goal": "First 4-waypoint puzzle. Players learn to plan for multiple checkpoints.",
+    "estimated_solve_seconds": 50
+  }
+}

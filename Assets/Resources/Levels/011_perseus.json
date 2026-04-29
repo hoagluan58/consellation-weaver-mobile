@@ -1,0 +1,22 @@
+{
+  "id": "011_perseus",
+  "index": 11,
+  "chapter": "chapter_2",
+  "tier": "medium",
+  "constellation": "Perseus",
+  "hemisphere": "N",
+  "best_month": 12,
+  "lore": "The Hero. Perseus slew the Gorgon Medusa and rescued Andromeda from the sea monster.",
+  "width": 4,
+  "height": 5,
+  "waypoints": [
+    {"x": 0, "y": 0, "order": 1},
+    {"x": 2, "y": 2, "order": 2},
+    {"x": 3, "y": 4, "order": 3}
+  ],
+  "solution": [[0,0],[1,0],[2,0],[3,0],[3,1],[2,1],[1,1],[0,1],[0,2],[1,2],[2,2],[3,2],[3,3],[2,3],[1,3],[0,3],[0,4],[1,4],[2,4],[3,4]],
+  "designer_notes": {
+    "pedagogical_goal": "First 4x5 grid. Boustrophedon remains valid, midpoint waypoint adds planning.",
+    "estimated_solve_seconds": 70
+  }
+}

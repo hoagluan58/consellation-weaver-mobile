@@ -1,0 +1,22 @@
+{
+  "id": "015_scorpius",
+  "index": 15,
+  "chapter": "chapter_2",
+  "tier": "hard",
+  "constellation": "Scorpius",
+  "hemisphere": "S",
+  "best_month": 7,
+  "lore": "The Scorpion. Antares burns red at its heart — a star so large it could swallow Mars's orbit.",
+  "width": 5,
+  "height": 5,
+  "waypoints": [
+    {"x": 0, "y": 0, "order": 1},
+    {"x": 2, "y": 2, "order": 2},
+    {"x": 4, "y": 4, "order": 3}
+  ],
+  "solution": [[0,0],[1,0],[2,0],[3,0],[4,0],[4,1],[3,1],[2,1],[1,1],[0,1],[0,2],[1,2],[2,2],[3,2],[4,2],[4,3],[3,3],[2,3],[1,3],[0,3],[0,4],[1,4],[2,4],[3,4],[4,4]],
+  "designer_notes": {
+    "pedagogical_goal": "First 5x5 grid. Classic boustrophedon scales up; center waypoint confirms the midpoint.",
+    "estimated_solve_seconds": 90
+  }
+}

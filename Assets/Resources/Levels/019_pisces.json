@@ -1,0 +1,23 @@
+{
+  "id": "019_pisces",
+  "index": 19,
+  "chapter": "chapter_3",
+  "tier": "hard",
+  "constellation": "Pisces",
+  "hemisphere": "N",
+  "best_month": 11,
+  "lore": "The Fish. Two fish tied by a cord, swimming in opposite directions across the celestial equator.",
+  "width": 5,
+  "height": 5,
+  "waypoints": [
+    {"x": 2, "y": 2, "order": 1},
+    {"x": 0, "y": 0, "order": 2},
+    {"x": 4, "y": 0, "order": 3},
+    {"x": 1, "y": 1, "order": 4}
+  ],
+  "solution": [[2,2],[2,1],[2,0],[1,0],[0,0],[0,1],[0,2],[0,3],[0,4],[1,4],[2,4],[3,4],[4,4],[4,3],[4,2],[4,1],[4,0],[3,0],[3,1],[3,2],[3,3],[2,3],[1,3],[1,2],[1,1]],
+  "designer_notes": {
+    "pedagogical_goal": "Center start. Forces players to abandon corner-start assumptions. Expert-level challenge.",
+    "estimated_solve_seconds": 120
+  }
+}
