@@ -72,9 +72,10 @@ namespace ConstellationWeaver.Core
             // Load and validate all level JSON files from Resources/Levels/
             LevelRepository.Instance.LoadAll();
 
-            // TODO Sprint 3: LocalSaveManager.Instance.Load() — restore player progress
-            // TODO Sprint 3: StreakManager.Instance.Initialize(saveData) — compute streak
-            // TODO Sprint 3: DailyPuzzleManager.Instance.Initialize() — determine today's puzzle
+            // Sprint 3.5 — Restore player progress from disk
+            // GameSaveData registers itself with LocalSaveManager in its own Awake,
+            // so it must be present in the Boot scene before GameManager.Start.
+            LocalSaveManager.Load();
 
             Debug.Log("[GameManager] All systems initialized.");
         }
@@ -103,7 +104,7 @@ namespace ConstellationWeaver.Core
             // Wait two frames: frame 1 = scene load, frame 2 = UIManager.Awake completes
             await UniTask.DelayFrame(2);
 
-            // TODO Sprint 3: read save data here to decide routing
+            // Sprint 3.10 — SplashView reads save data internally to decide routing
             UINavigator.ShowSplash();
         }
 

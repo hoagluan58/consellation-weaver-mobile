@@ -46,8 +46,8 @@ namespace ConstellationWeaver.UI
         {
             _dismissed = true;
 
-            // TODO Sprint 3.9: check LocalSaveManager for hasCompletedOnboarding
-            bool hasCompletedOnboarding = false; // Replace with save data read
+            // Sprint 3.9 — read save data to decide routing
+            bool hasCompletedOnboarding = ConstellationWeaver.Core.GameSaveData.I?.HasCompletedOnboarding ?? false;
 
             CloseSelf();
 

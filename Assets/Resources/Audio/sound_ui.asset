@@ -21,6 +21,36 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  defineKeyConstName: 
-  key: 
-  soundEntries: []
+  defineKeyConstName: SOUND_UI
+  key: sound_ui
+  soundEntries:
+  - defineKeyConstName: SFX_BUTTON
+    key: sfx_button
+    clip: {fileID: 8300000, guid: 53d7b7e2d26628942bd8025b5d0c65d8, type: 3}
+    playSettings:
+      volume: 0.8
+      loop: 0
+      pitch: 1
+      ignorePause: 0
+      overlapType: 0
+      fadeTime: 0
+  - defineKeyConstName: SFX_SCREEN_IN
+    key: sfx_screen_in
+    clip: {fileID: 8300000, guid: dbdf0f6e0d47adf48ab6c194c9bd4750, type: 3}
+    playSettings:
+      volume: 0.8
+      loop: 0
+      pitch: 1
+      ignorePause: 0
+      overlapType: 0
+      fadeTime: 0
+  - defineKeyConstName: SFX_SCREEN_OUT
+    key: sfx_screen_out
+    clip: {fileID: 8300000, guid: 0b9431efad634784fafaea45754812d9, type: 3}
+    playSettings:
+      volume: 0.8
+      loop: 0
+      pitch: 1
+      ignorePause: 0
+      overlapType: 0
+      fadeTime: 0

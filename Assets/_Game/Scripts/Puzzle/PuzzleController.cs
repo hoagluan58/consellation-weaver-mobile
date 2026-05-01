@@ -94,5 +94,19 @@ namespace ConstellationWeaver.Puzzle
                 _stateMachine.ChangeState(STATE_IDLE);
             }
         }
+
+        /// <summary>
+        /// Cancel the current puzzle without triggering solved events.
+        /// Call this when the player navigates away mid-puzzle.
+        /// </summary>
+        public void AbortPuzzle()
+        {
+            if (_pathModel != null)
+            {
+                _pathModel.Clear();
+                OnPathCleared?.Invoke();
+            }
+            _stateMachine?.ChangeState(STATE_IDLE);
+        }
     }
 }

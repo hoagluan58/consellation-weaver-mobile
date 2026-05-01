@@ -21,6 +21,56 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  defineKeyConstName: 
-  key: 
-  soundEntries: []
+  defineKeyConstName: SOUND_PUZZLE
+  key: sound_puzzle
+  soundEntries:
+  - defineKeyConstName: BGM_AMBIENT
+    key: bgm_ambient
+    clip: {fileID: 8300000, guid: b9d5d1a693e822647a5b847752e6b29d, type: 3}
+    playSettings:
+      volume: 0.7
+      loop: 1
+      pitch: 1
+      ignorePause: 0
+      overlapType: 0
+      fadeTime: 0
+  - defineKeyConstName: SFX_STAR_HIT
+    key: sfx_star_hit
+    clip: {fileID: 8300000, guid: 9745f45c65e14754eabbdb6a3faa8561, type: 3}
+    playSettings:
+      volume: 1
+      loop: 0
+      pitch: 1
+      ignorePause: 0
+      overlapType: 0
+      fadeTime: 0
+  - defineKeyConstName: SFX_PATH_TICK
+    key: sfx_path_tick
+    clip: {fileID: 8300000, guid: 0a0b06181e6110a40bc28d884c4f9665, type: 3}
+    playSettings:
+      volume: 0.4
+      loop: 0
+      pitch: 1
+      ignorePause: 0
+      overlapType: 0
+      fadeTime: 0
+  - defineKeyConstName: SFX_PATH_POP
+    key: sfx_path_pop
+    clip: {fileID: 8300000, guid: 0d35050442d85b64b9420eb84e9e51aa, type: 3}
+    playSettings:
+      volume: 0.6
+      loop: 0
+      pitch: 1
+      ignorePause: 0
+      overlapType: 0
+      fadeTime: 0
+  - defineKeyConstName: SFX_COMPLETE
+    key: sfx_complete
+    clip: {fileID: 8300000, guid: a69e5a9ccd32d2a418a9bf28bde868f9, type: 3}
+    playSettings:
+      volume: 1
+      loop: 0
+      pitch: 1
+      ignorePause: 0
+      overlapType: 1
+      fadeTime: 0
