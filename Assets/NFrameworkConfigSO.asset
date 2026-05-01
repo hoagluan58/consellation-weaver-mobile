@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: NFramework::NFramework.NFrameworkConfigSO
   scriptDefineNamespace: 
   uiScriptDefineSavePath: 
-  uiViewsFolderPath: 
+  uiViewsFolderPath: _Game/Prefabs/UI
   soundScriptDefineSavePath: 
   soundGroupFolderPath: 

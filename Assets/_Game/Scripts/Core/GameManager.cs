@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Cysharp.Threading.Tasks;
+using ConstellationWeaver.UI;
 
 namespace ConstellationWeaver.Core
 {
@@ -86,12 +88,23 @@ namespace ConstellationWeaver.Core
         private void TransitionToGameScene()
         {
             SetState(GameState.Game);
-
-            // TODO Sprint 3: if (!saveData.hasCompletedOnboarding) → show OnboardingView
-            // TODO Sprint 3: else → show HomeView via UIManager
-
             Debug.Log($"[GameManager] Loading scene '{SCENE_GAME}'.");
+            LoadGameSceneAsync().Forget();
+        }
+
+        /// <summary>
+        /// Loads the Game scene then opens SplashView on the next frame
+        /// (UIManager must finish its Awake before we call OpenResources).
+        /// </summary>
+        private async UniTaskVoid LoadGameSceneAsync()
+        {
             SceneManager.LoadScene(SCENE_GAME);
+
+            // Wait two frames: frame 1 = scene load, frame 2 = UIManager.Awake completes
+            await UniTask.DelayFrame(2);
+
+            // TODO Sprint 3: read save data here to decide routing
+            UINavigator.ShowSplash();
         }
 
         // ─── Public API ───────────────────────────────────────────────────────
