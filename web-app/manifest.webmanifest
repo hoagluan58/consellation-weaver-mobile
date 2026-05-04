@@ -1,0 +1,20 @@
+{
+  "name": "Constellation Weaver",
+  "short_name": "Weaver",
+  "description": "A quiet nightly ritual. Trace a constellation with one stroke.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#050818",
+  "theme_color": "#050818",
+  "categories": ["games", "puzzle"],
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

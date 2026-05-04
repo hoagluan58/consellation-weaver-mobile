@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#050818">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="A quiet nightly ritual. Trace a constellation with one stroke. One puzzle, every night.">
+  <title>Constellation Weaver</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+</head>
+<body>
+
+  <!-- Global starfield background -->
+  <canvas id="starfield-canvas"></canvas>
+
+  <!-- ═══ SPLASH ═══ -->
+  <div id="screen-splash" class="screen active">
+    <div class="splash-content">
+      <canvas id="splash-constellation" width="128" height="128" class="splash-stars"></canvas>
+      <h1 class="splash-wordmark">constellation weaver</h1>
+    </div>
+  </div>
+
+  <!-- ═══ ONBOARDING ═══ -->
+  <div id="screen-onboarding" class="screen">
+    <div class="onboarding-dots">
+      <div class="onboarding-dot active" data-step="0"></div>
+      <div class="onboarding-dot" data-step="1"></div>
+      <div class="onboarding-dot" data-step="2"></div>
+      <div class="onboarding-dot" data-step="3"></div>
+    </div>
+    <button class="btn-ghost onboarding-skip" id="btn-onboarding-skip">Skip</button>
+    <div class="onboarding-body" id="onboarding-body">
+      <!-- Filled dynamically per step -->
+    </div>
+    <div class="onboarding-footer" id="onboarding-footer">
+      <button class="btn-primary" id="btn-onboarding-next">Continue</button>
+    </div>
+  </div>
+
+  <!-- ═══ HOME ═══ -->
+  <div id="screen-home" class="screen">
+    <div class="home-content">
+      <!-- Status strip -->
+      <div class="status-strip">
+        <div class="streak-display">
+          <span class="streak-number" id="home-streak-number">☽</span>
+          <span class="streak-label" id="home-streak-label">Welcome</span>
+        </div>
+        <button class="icon-btn" id="btn-settings" aria-label="Settings">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        </button>
+      </div>
+
+      <!-- Hero daily card -->
+      <div class="hero-card" id="hero-card">
+        <span class="hero-solved-badge" id="hero-solved-badge">✓</span>
+        <span class="hero-eyebrow t-meta" id="hero-eyebrow">TONIGHT'S SKY</span>
+        <h2 class="hero-constellation" id="hero-constellation">—</h2>
+        <p class="hero-lore t-secondary" id="hero-lore"></p>
+        <button class="btn-primary" id="btn-daily-play">Begin</button>
+      </div>
+
+      <!-- Journey card -->
+      <div class="list-card" id="card-journey">
+        <div class="list-card-text">
+          <span class="list-card-eyebrow">JOURNEY</span>
+          <span class="list-card-title" id="journey-card-title">Chapter 1 — First Nights</span>
+        </div>
+        <span class="list-card-chevron">›</span>
+      </div>
+
+      <!-- Archive card -->
+      <div class="list-card" id="card-archive">
+        <div class="list-card-text">
+          <span class="list-card-eyebrow">ARCHIVE</span>
+          <span class="list-card-title">Past nights</span>
+        </div>
+        <span class="list-card-chevron">›</span>
+      </div>
+
+      <!-- Almanac card -->
+      <div class="list-card" id="card-almanac">
+        <div class="list-card-text">
+          <span class="list-card-eyebrow">ALMANAC</span>
+          <span class="list-card-title" id="almanac-card-title">0 of 88 constellations</span>
+        </div>
+        <span class="list-card-chevron">›</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PUZZLE ═══ -->
+  <div id="screen-puzzle" class="screen">
+    <div class="puzzle-topbar">
+      <button class="icon-btn" id="btn-puzzle-back" aria-label="Back">
+        <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </button>
+      <button class="icon-btn" id="btn-puzzle-hint" aria-label="Hint">
+        <svg viewBox="0 0 24 24"><path d="M9 18h6M10 22h4M12 2a7 7 0 017 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 01-1 1h-2a1 1 0 01-1-1v-2.26C10.19 13.47 9 11.38 9 9a7 7 0 017-7z"/></svg>
+      </button>
+    </div>
+    <div class="puzzle-metadata" id="puzzle-metadata"></div>
+    <div class="puzzle-rule-hint" id="puzzle-rule-hint">Connect the stars in order</div>
+    <div class="puzzle-container">
+      <canvas id="puzzle-canvas"></canvas>
+    </div>
+  </div>
+
+  <!-- ═══ COMPLETION OVERLAY ═══ -->
+  <div id="overlay-completion" class="overlay">
+    <div class="completion-content">
+      <div class="completion-shape">
+        <canvas id="completion-canvas" width="400" height="400"></canvas>
+      </div>
+      <h2 class="completion-name" id="completion-name"></h2>
+      <p class="completion-lore" id="completion-lore"></p>
+      <span class="completion-date" id="completion-date"></span>
+    </div>
+    <span class="completion-tap-hint">tap anywhere to continue</span>
+  </div>
+
+  <!-- ═══ JOURNEY ═══ -->
+  <div id="screen-journey" class="screen">
+    <div class="screen-topbar">
+      <button class="icon-btn" id="btn-journey-back" aria-label="Back">
+        <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </button>
+      <span class="screen-topbar-title">Journey</span>
+    </div>
+    <div class="journey-content" id="journey-content">
+      <!-- Filled dynamically -->
+    </div>
+  </div>
+
+  <!-- ═══ SETTINGS ═══ -->
+  <div id="screen-settings" class="screen">
+    <div class="screen-topbar">
+      <button class="icon-btn" id="btn-settings-back" aria-label="Back">
+        <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </button>
+      <span class="screen-topbar-title">Settings</span>
+    </div>
+    <div class="settings-content">
+      <div class="settings-section">
+        <div class="settings-section-title">Sound & Feel</div>
+        <div class="settings-row">
+          <span class="settings-row-label">Music</span>
+          <button class="toggle active" id="toggle-music" aria-label="Toggle music"></button>
+        </div>
+        <div class="settings-row">
+          <span class="settings-row-label">Sound Effects</span>
+          <button class="toggle active" id="toggle-sfx" aria-label="Toggle sound effects"></button>
+        </div>
+        <div class="settings-row">
+          <span class="settings-row-label">Haptics</span>
+          <button class="toggle active" id="toggle-haptics" aria-label="Toggle haptics"></button>
+        </div>
+      </div>
+      <div class="settings-section">
+        <div class="settings-section-title">Display</div>
+        <div class="settings-row">
+          <span class="settings-row-label">Hemisphere</span>
+          <span class="settings-row-value" id="settings-hemisphere">Northern</span>
+        </div>
+      </div>
+      <div class="settings-section">
+        <div class="settings-section-title">About</div>
+        <div class="settings-row">
+          <span class="settings-row-label">Version</span>
+          <span class="settings-row-value">1.0.0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>

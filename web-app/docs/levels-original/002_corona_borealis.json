@@ -1,0 +1,21 @@
+{
+  "id": "002_corona_borealis",
+  "index": 2,
+  "chapter": "tutorial",
+  "tier": "tutorial",
+  "constellation": "Corona Borealis",
+  "hemisphere": "N",
+  "best_month": 7,
+  "lore": "The Northern Crown, given by Dionysus to honor Ariadne and set among the stars.",
+  "width": 3,
+  "height": 3,
+  "waypoints": [
+    {"x": 0, "y": 0, "order": 1},
+    {"x": 2, "y": 0, "order": 2}
+  ],
+  "solution": [[0,0],[0,1],[0,2],[1,2],[2,2],[2,1],[1,1],[1,0],[2,0]],
+  "designer_notes": {
+    "pedagogical_goal": "Reinforce input with a diagonal start/end. Still just two waypoints.",
+    "estimated_solve_seconds": 12
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "id": "005_lyra",
+  "index": 5,
+  "chapter": "tutorial",
+  "tier": "tutorial",
+  "constellation": "Lyra",
+  "hemisphere": "N",
+  "best_month": 8,
+  "lore": "The harp of Orpheus, silent now, still singing among the summer stars.",
+  "width": 3,
+  "height": 3,
+  "waypoints": [
+    {"x": 0, "y": 2, "order": 1},
+    {"x": 1, "y": 0, "order": 2},
+    {"x": 2, "y": 0, "order": 3}
+  ],
+  "solution": [[0,2],[0,1],[0,0],[1,0],[1,1],[1,2],[2,2],[2,1],[2,0]],
+  "designer_notes": {
+    "pedagogical_goal": "Final tutorial. Waypoints 2 and 3 are near each other, teaching that direct routes are not always correct.",
+    "estimated_solve_seconds": 18
+  }
+}

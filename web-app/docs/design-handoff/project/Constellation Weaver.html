@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Constellation Weaver · Design</title>
+<style>
+  html, body { margin: 0; padding: 0; background: #1a1612; font-family: -apple-system, system-ui, sans-serif; }
+  #root { width: 100vw; height: 100vh; overflow: hidden; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="tokens.jsx"></script>
+<script type="text/babel" src="icons.jsx"></script>
+<script type="text/babel" src="screens-onboarding.jsx"></script>
+<script type="text/babel" src="screens-home-puzzle.jsx"></script>
+<script type="text/babel" src="screens-journey-archive-almanac.jsx"></script>
+<script type="text/babel" src="screens-settings-starlight.jsx"></script>
+<script type="text/babel" src="style-component-pages.jsx"></script>
+
+<script type="text/babel" data-presets="react">
+// (DesignCanvas/DCSection/DCArtboard are already on window from design-canvas.jsx)
+
+// Phone is 390x844; artboards get a little headroom for labels
+const PW = 390, PH = 844;
+
+function App() {
+  return (
+    <DesignCanvas background="#0d1018">
+      {/* ─── Intro ─── */}
+      <DCSection id="intro" title="Constellation Weaver" subtitle="A calm nightly puzzle · v1 screen set · 17 screens + style + components">
+        <DCArtboard id="style" label="Foundations" width={1120} height={1260}>
+          <StylePage/>
+        </DCArtboard>
+        <DCArtboard id="components" label="Component Library" width={1120} height={1320}>
+          <ComponentPage/>
+        </DCArtboard>
+      </DCSection>
+
+      {/* ─── P0: Splash + Onboarding ─── */}
+      <DCSection id="p0-entry" title="P0 · Entry & Onboarding" subtitle="1.0 Splash → 2.x Onboarding → first puzzle">
+        <DCArtboard id="splash" label="1 · Splash" width={PW} height={PH}>
+          <Splash/>
+        </DCArtboard>
+        <DCArtboard id="onb1" label="2 · Onboarding 1/4 — Trace" width={PW} height={PH}>
+          <Onboarding1/>
+        </DCArtboard>
+        <DCArtboard id="onb2" label="3 · Onboarding 2/4 — In order" width={PW} height={PH}>
+          <Onboarding2/>
+        </DCArtboard>
+        <DCArtboard id="onb3" label="4 · Onboarding 3/4 — Every cell" width={PW} height={PH}>
+          <Onboarding3/>
+        </DCArtboard>
+        <DCArtboard id="onb4" label="5 · Onboarding 4/4 — First puzzle" width={PW} height={PH}>
+          <Onboarding4/>
+        </DCArtboard>
+      </DCSection>
+
+      {/* ─── P0: Home states ─── */}
+      <DCSection id="p0-home" title="P0 · Home" subtitle="6.x · Three states">
+        <DCArtboard id="home-fresh" label="6a · Home / Fresh" width={PW} height={PH}>
+          <Home state="fresh"/>
+        </DCArtboard>
+        <DCArtboard id="home-streak" label="6b · Home / With streak" width={PW} height={PH}>
+          <Home state="with-streak"/>
+        </DCArtboard>
+        <DCArtboard id="home-solved" label="6c · Home / Daily solved" width={PW} height={PH}>
+          <Home state="daily-solved"/>
+        </DCArtboard>
+      </DCSection>
+
+      {/* ─── P0: Puzzle states + Completion ─── */}
+      <DCSection id="p0-puzzle" title="P0 · Puzzle & Completion" subtitle="7.x Puzzle · 8.x Completion overlay · Interactive puzzle included">
+        <DCArtboard id="puzzle-idle" label="7a · Puzzle / Idle" width={PW} height={PH}>
+          <Puzzle state="idle"/>
+        </DCArtboard>
+        <DCArtboard id="puzzle-drawing" label="7b · Puzzle / Drawing" width={PW} height={PH}>
+          <Puzzle state="drawing"/>
+        </DCArtboard>
+        <DCArtboard id="puzzle-solved" label="7c · Puzzle / Solved" width={PW} height={PH}>
+          <Puzzle state="solved"/>
+        </DCArtboard>
+        <DCArtboard id="puzzle-live" label="7d · Puzzle / Live · drag to draw" width={PW} height={PH}>
+          <Puzzle state="drawing" interactive/>
+        </DCArtboard>
+        <DCArtboard id="completion" label="8 · Completion overlay" width={PW} height={PH}>
+          <Completion/>
+        </DCArtboard>
+      </DCSection>
+
+      {/* ─── P1: Journey / Archive / Almanac ─── */}
+      <DCSection id="p1-content" title="P1 · Journey · Archive · Almanac" subtitle="9.x · 10.x · 11.x">
+        <DCArtboard id="journey" label="9 · Journey / Campaign map" width={PW} height={PH}>
+          <Journey/>
+        </DCArtboard>
+        <DCArtboard id="archive" label="10a · Archive / Default" width={PW} height={PH}>
+          <Archive/>
+        </DCArtboard>
+        <DCArtboard id="archive-empty" label="10b · Archive / Empty" width={PW} height={PH}>
+          <Archive empty/>
+        </DCArtboard>
+        <DCArtboard id="almanac" label="11a · Almanac / Default" width={PW} height={PH}>
+          <Almanac/>
+        </DCArtboard>
+        <DCArtboard id="almanac-empty" label="11b · Almanac / Empty" width={PW} height={PH}>
+          <Almanac empty/>
+        </DCArtboard>
+        <DCArtboard id="almanac-pop" label="11c · Almanac / Detail popover" width={PW} height={PH}>
+          <Almanac popover/>
+        </DCArtboard>
+      </DCSection>
+
+      {/* ─── P1: Settings + Starlight ─── */}
+      <DCSection id="p1-system" title="P1 · Settings & Starlight" subtitle="12.x · 13.x">
+        <DCArtboard id="settings" label="12 · Settings" width={PW} height={PH}>
+          <Settings/>
+        </DCArtboard>
+        <DCArtboard id="starlight" label="13a · Starlight / Default" width={PW} height={PH}>
+          <Starlight/>
+        </DCArtboard>
+        <DCArtboard id="starlight-p" label="13b · Starlight / Purchased" width={PW} height={PH}>
+          <Starlight purchased/>
+        </DCArtboard>
+      </DCSection>
+
+      {/* ─── P2: Modal sheets + About ─── */}
+      <DCSection id="p2-sheets" title="P2 · Sheets & About" subtitle="14.x · 15.x · 16.x · 17.x">
+        <DCArtboard id="hemi" label="14 · Hemisphere picker" width={PW} height={PH}>
+          <HemispherePicker/>
+        </DCArtboard>
+        <DCArtboard id="hint" label="15a · Hint confirm" width={PW} height={PH}>
+          <HintConfirm/>
+        </DCArtboard>
+        <DCArtboard id="hint-un" label="15b · Hint / Ad unavailable" width={PW} height={PH}>
+          <HintConfirm unavailable/>
+        </DCArtboard>
+        <DCArtboard id="notif" label="16 · Notification opt-in" width={PW} height={PH}>
+          <NotificationOptIn/>
+        </DCArtboard>
+        <DCArtboard id="about" label="17 · About / Credits" width={PW} height={PH}>
+          <About/>
+        </DCArtboard>
+      </DCSection>
+    </DesignCanvas>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
