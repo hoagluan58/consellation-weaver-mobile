@@ -8,10 +8,11 @@
 //
 // Attach to OnboardingView prefab root.
 
+using ConstellationWeaver.Core;
+using ConstellationWeaver.Puzzle;
+using NFramework;
 using UnityEngine;
 using UnityEngine.UI;
-using NFramework;
-using ConstellationWeaver.Core;
 
 namespace ConstellationWeaver.UI
 {
@@ -42,7 +43,7 @@ namespace ConstellationWeaver.UI
 
         private int _currentStep = 0;
         private const int TOTAL_STEPS = 4;
-        private const int GATED_STEP  = 3;
+        private const int GATED_STEP = 3;
 
         public override void OnOpen(UIInputData inputData)
         {

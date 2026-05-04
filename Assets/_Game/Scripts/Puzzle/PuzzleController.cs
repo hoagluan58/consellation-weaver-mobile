@@ -1,7 +1,7 @@
-using UnityEngine;
-using NFramework;
-using ConstellationWeaver.Data;
 using System;
+using ConstellationWeaver.Data;
+using NFramework;
+using UnityEngine;
 
 namespace ConstellationWeaver.Puzzle
 {
@@ -29,7 +29,8 @@ namespace ConstellationWeaver.Puzzle
         {
             _gridModel = new GridModel(levelData);
             _pathModel = new PathModel(_gridModel, levelData.width * levelData.height);
-            
+
+
             _stateMachine = new StateMachine();
             _stateMachine.Init(STATE_IDLE,
                 new StateBase(STATE_IDLE, _stateMachine),
@@ -42,7 +43,8 @@ namespace ConstellationWeaver.Puzzle
         public void HandleTouchDown(Vector2Int gridCell)
         {
             if (CurrentStateId != STATE_IDLE) return;
-            
+
+
             _pathModel.Clear();
             OnPathCleared?.Invoke();
 
@@ -57,7 +59,8 @@ namespace ConstellationWeaver.Puzzle
         {
             if (CurrentStateId != STATE_DRAWING) return;
 
-            if (_pathModel.Path.Count > 0 && _pathModel.Path[_pathModel.Path.Count - 1] == gridCell) 
+            if (_pathModel.Path.Count > 0 && _pathModel.Path[_pathModel.Path.Count - 1] == gridCell)
+
                 return; // Still in the same cell
 
             int previousCount = _pathModel.Path.Count;
@@ -81,7 +84,8 @@ namespace ConstellationWeaver.Puzzle
             if (CurrentStateId != STATE_DRAWING) return;
 
             _stateMachine.ChangeState(STATE_VALIDATING);
-            
+
+
             if (PuzzleValidator.IsPathValidSolution(_gridModel, _pathModel))
             {
                 _stateMachine.ChangeState(STATE_SOLVED);

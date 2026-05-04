@@ -1,8 +1,9 @@
 using System;
+using ConstellationWeaver.UI;
+using Cysharp.Threading.Tasks;
+using NFramework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Cysharp.Threading.Tasks;
-using ConstellationWeaver.UI;
 
 namespace ConstellationWeaver.Core
 {

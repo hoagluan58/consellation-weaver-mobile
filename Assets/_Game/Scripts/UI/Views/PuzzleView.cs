@@ -8,12 +8,12 @@
 // Receives PuzzleInputData, loads level data, wires events, returns PuzzleOutputData on close.
 
 using System.Diagnostics;
+using ConstellationWeaver.Core;
+using ConstellationWeaver.Puzzle;
+using NFramework;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using NFramework;
-using ConstellationWeaver.Core;
-using ConstellationWeaver.Puzzle;
 
 namespace ConstellationWeaver.UI
 {
@@ -33,8 +33,8 @@ namespace ConstellationWeaver.UI
     public class PuzzleView : UIView
     {
         [Header("Top Bar")]
-        [SerializeField] private Button   _backButton;
-        [SerializeField] private Button   _hintButton;
+        [SerializeField] private Button _backButton;
+        [SerializeField] private Button _hintButton;
 
         [Header("Metadata")]
         [SerializeField] private TMP_Text _constellationLabel;  // e.g. "Orion"
@@ -42,22 +42,22 @@ namespace ConstellationWeaver.UI
 
         [Header("Puzzle Systems")]
         [SerializeField] private PuzzleController _puzzleController;
-        [SerializeField] private PuzzleRenderer   _puzzleRenderer;
+        [SerializeField] private PuzzleRenderer _puzzleRenderer;
 
         // ─── State ────────────────────────────────────────────────────────────
         private PuzzleInputData _inputData;
-        private Data.LevelData  _levelData;
-        private Stopwatch       _timer;
-        private int             _hintsUsed;
+        private Data.LevelData _levelData;
+        private Stopwatch _timer;
+        private int _hintsUsed;
 
         // ─── Open / Close ─────────────────────────────────────────────────────
         public override void OnOpen(UIInputData inputData)
         {
             base.OnOpen(inputData);
 
-            _inputData  = inputData as PuzzleInputData;
-            _timer      = Stopwatch.StartNew();
-            _hintsUsed  = 0;
+            _inputData = inputData as PuzzleInputData;
+            _timer = Stopwatch.StartNew();
+            _hintsUsed = 0;
 
             if (_inputData == null || string.IsNullOrEmpty(_inputData.levelId))
             {
@@ -89,10 +89,10 @@ namespace ConstellationWeaver.UI
 
             return new PuzzleOutputData
             {
-                levelId          = _inputData?.levelId ?? "",
-                solved           = false,
+                levelId = _inputData?.levelId ?? "",
+                solved = false,
                 solveTimeSeconds = (float)(_timer?.Elapsed.TotalSeconds ?? 0),
-                hintsUsed        = _hintsUsed,
+                hintsUsed = _hintsUsed,
             };
         }
 
@@ -148,7 +148,7 @@ namespace ConstellationWeaver.UI
         private void HandlePuzzleSolved()
         {
             _timer?.Stop();
-            GameSaveData.I?.MarkLevelSolved(_inputData.levelId, _levelData?.constellationName);
+            GameSaveData.I?.MarkLevelSolved(_inputData.levelId, _levelData?.constellation);
 
             // If this was the daily, record the solve for streak
             if (_inputData?.source == PuzzleInputData.PuzzleSource.Daily)
@@ -156,10 +156,10 @@ namespace ConstellationWeaver.UI
 
             UINavigator.ShowCompletionOverlay(new CompletionInputData
             {
-                levelId           = _inputData?.levelId ?? "",
+                levelId = _inputData?.levelId ?? "",
                 constellationName = _levelData?.constellation ?? "",
-                loreLine          = _levelData?.lore ?? "",
-                wasDaily          = _inputData?.source == PuzzleInputData.PuzzleSource.Daily,
+                loreLine = _levelData?.lore ?? "",
+                wasDaily = _inputData?.source == PuzzleInputData.PuzzleSource.Daily,
             });
         }
     }

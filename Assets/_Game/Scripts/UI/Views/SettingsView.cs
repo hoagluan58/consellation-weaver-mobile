@@ -6,11 +6,11 @@
 //
 // Wiring: bind all [SerializeField] fields in the prefab Inspector.
 
+using ConstellationWeaver.Core;
+using NFramework;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using NFramework;
-using ConstellationWeaver.Core;
 
 namespace ConstellationWeaver.UI
 {
@@ -33,7 +33,7 @@ namespace ConstellationWeaver.UI
         [SerializeField] private Button _backButton;
 
         [Header("Hemisphere")]
-        [SerializeField] private Button   _hemisphereButton;
+        [SerializeField] private Button _hemisphereButton;
         [SerializeField] private TMP_Text _hemisphereLabel;   // "Northern" / "Southern"
 
         [Header("Audio")]
@@ -77,8 +77,8 @@ namespace ConstellationWeaver.UI
                 _hemisphereLabel.SetText(isNorth ? "Northern" : "Southern");
             }
 
-            SetToggleSilently(_musicToggle,   save.HasCompletedOnboarding ? SoundManager.BgmStatus : true);
-            SetToggleSilently(_sfxToggle,     save.HasCompletedOnboarding ? SoundManager.SfxStatus : true);
+            SetToggleSilently(_musicToggle, save.HasCompletedOnboarding ? SoundManager.BgmStatus : true);
+            SetToggleSilently(_sfxToggle, save.HasCompletedOnboarding ? SoundManager.SfxStatus : true);
             SetToggleSilently(_hapticsToggle, true); // VibrationManager has no status API — use save
         }
 
@@ -91,8 +91,8 @@ namespace ConstellationWeaver.UI
             _restoreButton?.onClick.AddListener(OnRestorePressed);
             _creditsButton?.onClick.AddListener(OnCreditsPressed);
 
-            if (_musicToggle)   _musicToggle.onValueChanged.AddListener(OnMusicChanged);
-            if (_sfxToggle)     _sfxToggle.onValueChanged.AddListener(OnSfxChanged);
+            if (_musicToggle) _musicToggle.onValueChanged.AddListener(OnMusicChanged);
+            if (_sfxToggle) _sfxToggle.onValueChanged.AddListener(OnSfxChanged);
             if (_hapticsToggle) _hapticsToggle.onValueChanged.AddListener(OnHapticsChanged);
         }
 
@@ -104,13 +104,13 @@ namespace ConstellationWeaver.UI
             _restoreButton?.onClick.RemoveListener(OnRestorePressed);
             _creditsButton?.onClick.RemoveListener(OnCreditsPressed);
 
-            if (_musicToggle)   _musicToggle.onValueChanged.RemoveListener(OnMusicChanged);
-            if (_sfxToggle)     _sfxToggle.onValueChanged.RemoveListener(OnSfxChanged);
+            if (_musicToggle) _musicToggle.onValueChanged.RemoveListener(OnMusicChanged);
+            if (_sfxToggle) _sfxToggle.onValueChanged.RemoveListener(OnSfxChanged);
             if (_hapticsToggle) _hapticsToggle.onValueChanged.RemoveListener(OnHapticsChanged);
         }
 
         // ─── Handlers ─────────────────────────────────────────────────────────
-        private void OnBackPressed()  => CloseSelf();
+        private void OnBackPressed() => CloseSelf();
 
         private void OnHemispherePressed() => UINavigator.ShowHemispherePicker();
 
@@ -128,7 +128,7 @@ namespace ConstellationWeaver.UI
 
         private void OnHapticsChanged(bool value)
         {
-            VibrationManager.I.CanVibrate = value;
+            VibrationManager.I.Status = value;
             GameSaveData.I?.SetHapticsEnabled(value);
         }
 
