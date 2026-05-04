@@ -128,28 +128,31 @@ export class PuzzleRenderer {
   }
 
   resize(containerWidth, containerHeight, board) {
-    const maxSide = Math.max(120, Math.min(containerWidth, containerHeight) - 32);
-    const side = Math.min(maxSide, 400);
-    this.canvasSize = side;
-    this.canvas.style.width = side + 'px';
-    this.canvas.style.height = side + 'px';
-    this.canvas.width = Math.round(side * this.dpr);
-    this.canvas.height = Math.round(side * this.dpr);
+    const cssW = Math.max(1, containerWidth);
+    const cssH = Math.max(1, containerHeight);
+    this.canvas.width = Math.round(cssW * this.dpr);
+    this.canvas.height = Math.round(cssH * this.dpr);
     this.ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
 
-    const pad = side * 0.16;
-    const innerW = side - pad * 2;
-    const innerH = side - pad * 2;
+    const playMax = Math.max(120, Math.min(cssW, cssH) - 32);
+    const playSide = Math.min(playMax, 400);
+    this.canvasSize = playSide;
+    const offsetX = (cssW - playSide) / 2;
+    const offsetY = (cssH - playSide) / 2;
+
+    const pad = playSide * 0.16;
+    const innerW = playSide - pad * 2;
+    const innerH = playSide - pad * 2;
     this.dotPixelPositions = board.dots.map(d => ({
-      x: pad + (d.x / board.boundsW) * innerW,
-      y: pad + (d.y / board.boundsH) * innerH,
+      x: offsetX + pad + (d.x / board.boundsW) * innerW,
+      y: offsetY + pad + (d.y / board.boundsH) * innerH,
     }));
 
-    this.starRadius = Math.max(8, side * 0.038);
-    this.fontSize = Math.max(13, side * 0.045);
-    this.lineWidth = Math.max(5, side * 0.022);
-    this.snapRadius = side * 0.075;            // in-flight snap distance
-    this.startGraceRadius = side * 0.11;       // initial-touch lenience
+    this.starRadius = Math.max(8, playSide * 0.038);
+    this.fontSize = Math.max(13, playSide * 0.045);
+    this.lineWidth = Math.max(5, playSide * 0.022);
+    this.snapRadius = playSide * 0.075;            // in-flight snap distance
+    this.startGraceRadius = playSide * 0.11;       // initial-touch lenience
   }
 
   cursorToCanvas(clientX, clientY) {
@@ -333,7 +336,9 @@ export class PuzzleRenderer {
 }
 
 // ══════════════════════════════════
-// TOUCH HANDLER — pure pointer relay
+// TOUCH HANDLER — pointer relay with capture
+// Once a drag begins, the canvas captures the pointer so the line follows
+// the finger anywhere on screen — no cancel on leave, no clipping at the edge.
 // ══════════════════════════════════
 export class TouchHandler {
   constructor(canvas, renderer) {
@@ -341,37 +346,45 @@ export class TouchHandler {
     this.renderer = renderer;
     this.active = false;
     this.enabled = true;
+    this.pointerId = null;
     this.onStart = null; // (pos) => boolean (true to begin tracking)
     this.onMove = null;  // (pos) => void
     this.onEnd = null;   // () => void
 
-    canvas.addEventListener('mousedown', e => this.handleStart(e));
-    canvas.addEventListener('mousemove', e => this.handleMove(e));
-    canvas.addEventListener('mouseup', () => this.handleEnd());
-    canvas.addEventListener('mouseleave', () => this.handleEnd());
-    canvas.addEventListener('touchstart', e => { e.preventDefault(); this.handleStart(e.touches[0]); }, { passive: false });
-    canvas.addEventListener('touchmove', e => { e.preventDefault(); this.handleMove(e.touches[0]); }, { passive: false });
-    canvas.addEventListener('touchend', e => { e.preventDefault(); this.handleEnd(); }, { passive: false });
-    canvas.addEventListener('touchcancel', () => this.handleEnd());
+    canvas.addEventListener('pointerdown', e => this.handleStart(e));
+    canvas.addEventListener('pointermove', e => this.handleMove(e));
+    canvas.addEventListener('pointerup', e => this.handleEnd(e));
+    canvas.addEventListener('pointercancel', e => this.handleEnd(e));
   }
 
   handleStart(e) {
     if (!this.enabled) return;
+    if (this.active) return;
     const pos = this.renderer.cursorToCanvas(e.clientX, e.clientY);
     if (this.onStart && this.onStart(pos)) {
       this.active = true;
+      this.pointerId = e.pointerId;
+      try { this.canvas.setPointerCapture(e.pointerId); } catch (_) { /* ignore */ }
+      e.preventDefault();
     }
   }
 
   handleMove(e) {
     if (!this.active || !this.enabled) return;
+    if (e.pointerId !== this.pointerId) return;
     const pos = this.renderer.cursorToCanvas(e.clientX, e.clientY);
     if (this.onMove) this.onMove(pos);
+    e.preventDefault();
   }
 
-  handleEnd() {
+  handleEnd(e) {
     if (!this.active) return;
+    if (e && e.pointerId !== this.pointerId) return;
     this.active = false;
+    if (this.pointerId !== null) {
+      try { this.canvas.releasePointerCapture(this.pointerId); } catch (_) { /* ignore */ }
+      this.pointerId = null;
+    }
     if (this.onEnd) this.onEnd();
   }
 }
